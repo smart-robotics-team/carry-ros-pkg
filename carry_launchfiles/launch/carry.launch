@@ -9,6 +9,12 @@
   <include file="$(find carry_launchfiles)/launch/sensors.launch">
   </include>
 
+  <include file="$(find carry_launchfiles)/launch/communication.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/battery.launch">
+  </include>
+
   <include file="$(find carry_launchfiles)/launch/hector.launch">
   </include>
 <!--

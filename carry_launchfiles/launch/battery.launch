@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+
+  <!-- BATTERY_CHECKER NODE -->
+  <node pkg="battery_checker" type="battery_checker" name="CARRY_battery_checker" output="screen">
+    <param name="voltage_limit" value="4.4" />
+    <param name="time_voltage_info" value="600.0" />
+    <param name="time_need_charge" value="300.0" />
+
+    <remap from="/battery_voltage" to="/CARRY/battery_level" />
+    <remap from="/info_string" to="/CARRY/from_ros_to_slack" />
+    <remap from="/need_charge" to="/CARRY/go_recharge" />
+  </node>
+
+
+</launch>
