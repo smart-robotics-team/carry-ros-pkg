@@ -5,7 +5,7 @@
 
   <!-- BATTERY_CHECKER NODE -->
   <node pkg="battery_checker" type="battery_checker" name="CARRY_battery_checker" output="screen">
-    <param name="voltage_limit" value="4.4" />
+    <param name="voltage_limit" value="4.5" />
     <param name="time_voltage_info" value="600.0" />
     <param name="time_need_charge" value="300.0" />
 
