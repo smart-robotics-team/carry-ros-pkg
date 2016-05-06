@@ -200,7 +200,7 @@ class SMACHAI():
 
 
         # Create and start the SMACH introspection server
-        intro_server = IntrospectionServer('carry_sm', self.sm_top, '/SM_CARRY_ROOT')
+        intro_server = IntrospectionServer('carry_test_sm', self.sm_top, '/SM_CARRY_TEST_ROOT')
         intro_server.start()
         
         # Execute the state machine
