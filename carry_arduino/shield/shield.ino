@@ -46,52 +46,52 @@ void messageTwistCb( const geometry_msgs::Twist& msg){
   if(msg.linear.x > 0.01)
   {
     uint16_t i=0;
-    nb_pixels = fmin(msg.linear.x / 0.2 * 8.0, 8);
-    strip.setPixelColor(7, strip.Color(0, 255, 0)); 
+    nb_pixels = fmin(msg.linear.x / 0.2 * 9.0, 9.0);
+    //strip.setPixelColor(7, strip.Color(0, 255, 0)); 
     for(i=0; i<nb_pixels; i++) {
-      strip.setPixelColor(7+i, strip.Color(0, 255, 0)); 
-      strip.setPixelColor(7-i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(0+i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(59-i, strip.Color(0, 255, 0)); 
     }
-    for(; i<8; i++) {
-      strip.setPixelColor(7+i, 0);
-      strip.setPixelColor(7-i, 0);
+    for(; i<9; i++) {
+      strip.setPixelColor(0+i, 0);
+      strip.setPixelColor(59-i, 0);
     }
     
-    strip.setPixelColor(37, 0);
-    for(i=0; i<8; i++) {
-      strip.setPixelColor(37+i, 0); // blue
-      strip.setPixelColor(37-i, 0); // blue
+    //strip.setPixelColor(37, 0);
+    for(i=0; i<9; i++) {
+      strip.setPixelColor(30+i, 0); // blue
+      strip.setPixelColor(29-i, 0); // blue
     }
     
   }
   else if(msg.linear.x < -0.01)
   {
     uint16_t i=0;
-    nb_pixels = fmin(-msg.linear.x / 0.2 * 8.0, 8);
-    strip.setPixelColor(37, strip.Color(0, 255, 0)); 
+    nb_pixels = fmin(-msg.linear.x / 0.2 * 9.0, 9);
+    //strip.setPixelColor(37, strip.Color(0, 255, 0)); 
     for(i=0; i<nb_pixels; i++) {
-      strip.setPixelColor(37+i, strip.Color(0, 255, 0)); 
-      strip.setPixelColor(37-i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(30+i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(29-i, strip.Color(0, 255, 0)); 
     }
-    for(; i<8; i++) {
-      strip.setPixelColor(37+i, 0);
-      strip.setPixelColor(37-i, 0);
+    for(; i<9; i++) {
+      strip.setPixelColor(30+i, 0);
+      strip.setPixelColor(29-i, 0);
     }
     
-    strip.setPixelColor(7, 0);
-    for(i=0; i<8; i++) {
-      strip.setPixelColor(7+i, 0); // blue
-      strip.setPixelColor(7-i, 0); // blue
+    //strip.setPixelColor(7, 0);
+    for(i=0; i<9; i++) {
+      strip.setPixelColor(0+i, 0); // blue
+      strip.setPixelColor(59-i, 0); // blue
     }
     
   }
   else
   {
-    for(uint16_t i=0; i<8; i++) {
-      strip.setPixelColor(7+i, 0);
-      strip.setPixelColor(7-i, 0);
-      strip.setPixelColor(37+i, 0);
-      strip.setPixelColor(37-i, 0);
+    for(uint16_t i=0; i<9; i++) {
+      strip.setPixelColor(0+i, 0);
+      strip.setPixelColor(59-i, 0);
+      strip.setPixelColor(30+i, 0);
+      strip.setPixelColor(29-i, 0);
     }
   }
   
@@ -101,20 +101,20 @@ void messageTwistCb( const geometry_msgs::Twist& msg){
   {
     uint16_t i=0;
     nb_pixels = fmin(msg.linear.y / 0.2 * 8.0, 8);
-    strip.setPixelColor(22, strip.Color(0, 255, 0)); 
+    //strip.setPixelColor(22, strip.Color(0, 255, 0)); 
     for(i=0; i<nb_pixels; i++) {
-      strip.setPixelColor(22+i, strip.Color(0, 255, 0)); 
-      strip.setPixelColor(22-i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(15+i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(14-i, strip.Color(0, 255, 0)); 
     }
     for(; i<8; i++) {
-      strip.setPixelColor(22+i, 0);
-      strip.setPixelColor(22-i, 0);
+      strip.setPixelColor(15+i, 0);
+      strip.setPixelColor(14-i, 0);
     }
     
-    strip.setPixelColor(52, 0);
+    //strip.setPixelColor(52, 0);
     for(i=0; i<8; i++) {
-      strip.setPixelColor(52+i, 0); // blue
-      strip.setPixelColor(52-i, 0); // blue
+      strip.setPixelColor(45+i, 0); // blue
+      strip.setPixelColor(44-i, 0); // blue
     }
     
   }
@@ -122,30 +122,30 @@ void messageTwistCb( const geometry_msgs::Twist& msg){
   {
     uint16_t i=0;
     nb_pixels = fmin(-msg.linear.y / 0.2 * 8.0, 8);
-    strip.setPixelColor(52, strip.Color(0, 255, 0)); 
+    //strip.setPixelColor(52, strip.Color(0, 255, 0)); 
     for(i=0; i<nb_pixels; i++) {
-      strip.setPixelColor(52+i, strip.Color(0, 255, 0)); 
-      strip.setPixelColor(52-i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(45+i, strip.Color(0, 255, 0)); 
+      strip.setPixelColor(44-i, strip.Color(0, 255, 0)); 
     }
     for(; i<8; i++) {
-      strip.setPixelColor(52+i, 0);
-      strip.setPixelColor(52-i, 0);
+      strip.setPixelColor(45+i, 0);
+      strip.setPixelColor(44-i, 0);
     }
     
-    strip.setPixelColor(22, 0);
+    //strip.setPixelColor(22, 0);
     for(i=0; i<8; i++) {
-      strip.setPixelColor(22+i, 0); // blue
-      strip.setPixelColor(22-i, 0); // blue
+      strip.setPixelColor(15+i, 0); // blue
+      strip.setPixelColor(14-i, 0); // blue
     }
     
   }
   else
   {
     for(uint16_t i=0; i<8; i++) {
-      strip.setPixelColor(22+i, 0);
-      strip.setPixelColor(22-i, 0);
-      strip.setPixelColor(52+i, 0);
-      strip.setPixelColor(52-i, 0);
+      strip.setPixelColor(15+i, 0);
+      strip.setPixelColor(14-i, 0);
+      strip.setPixelColor(45+i, 0);
+      strip.setPixelColor(44-i, 0);
     }
   }
   
