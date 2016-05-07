@@ -183,12 +183,18 @@ class Charging(State):
         State.__init__(self, outcomes=['succeeded','preempted'])
 
 	self.charge_pub = rospy.Publisher('/CARRY/recharge_battery', Empty, queue_size=10)
+	self.string_pub = rospy.Publisher('/CARRY/from_ros_to_slack', String, queue_size=10)
         pass
 
     def execute(self, userdata):
+        my_string = String()
+        my_string.data = "Start charging."
         self.charge_pub.publish(Empty())
+        self.string_pub.publish(my_string)
         rospy.loginfo("Charging... Sleep 2 hours")
         rospy.sleep(2.1*60.0*60.0)
+        my_string.data = "Charge done."
+        self.string_pub.publish(my_string)
         return 'succeeded'
 
 
