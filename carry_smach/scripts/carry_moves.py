@@ -273,6 +273,16 @@ class SMACHAI():
 
         # Add 
         with self.sm_in_charge_room:
+            StateMachine.add('CHECK_DESTINATION', CheckDestination(),
+                             transitions={'succeeded':'WAIT_INPUT',
+                                          'aborted':'WAIT_INPUT',
+                                          'go_recharge':'GO_BACK',
+                                          'go_main_room':'WAIT_INPUT',
+                                          'go_corridor':'WAIT_INPUT',
+                                          'go_kitchen':'WAIT_INPUT',
+                                          'go_bed_room':'WAIT_INPUT'},
+                             remapping={'waypoint_in':'sm_input',
+                                        'waypoint_out':'sm_output'})  
             StateMachine.add('WAIT_INPUT', self.sm_in_charge_room_wait_input, transitions={'succeeded':'succeeded',
                                                                                 'aborted':'succeeded',
                                                                                 'go_recharge':'GO_BACK',
@@ -493,7 +503,7 @@ class SMACHAI():
 
 	# Create the top level state machine
         self.sm_top = StateMachine(outcomes=['succeeded', 'aborted', 'preempted'])
-	self.sm_top.userdata.goal = self.recharge_position
+	self.sm_top.userdata.goal = self.main_room_position
 
         # Add nav_patrol, sm_recharge and a Stop() machine to sm_top
         with self.sm_top:
