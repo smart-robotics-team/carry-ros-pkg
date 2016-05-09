@@ -10,7 +10,7 @@ CARRY_costmap:
   #footprint: [[-0.1, -0.1], [-0.1, 0.1], [0.1, 0.1], [0.1, -0.1]]
   robot_radius: 0.20
   static_map: false
-  resolution: 0.01
+  resolution: 0.02
   map_type: costmap
   rolling_window: false
   width: 10.0

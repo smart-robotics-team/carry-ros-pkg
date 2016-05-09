@@ -40,9 +40,11 @@
     <remap from="/scan" to="/CARRY/laser_nav" />
   </node>
 
-  <!-- FILTER LASER NODE 
+  <!-- FILTER LASER NODE -->
   <node pkg="test_pcl" type="laser_test" name="Filter_laser" output="screen">
-  </node>-->
+    <param name="number_remove" value="10" />
+    <param name="range_min" value="0.1" />
+  </node>
 
   <!-- Arduino on the Odroid-U3 -->
   <node pkg="rosserial_python" type="serial_node.py" respawn="false" name="CARRY_Odruino" output="screen" args="/dev/ttyS2">

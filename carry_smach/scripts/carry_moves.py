@@ -37,11 +37,11 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionFeedb
 
 
 
-recharge_position = Pose(Point(0.0, 0.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
-main_room_position = Pose(Point(0.0, 1.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
-corridor_position = Pose(Point(0.0, 2.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
-kitchen_position = Pose(Point(0.0, 3.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
-bed_room_position = Pose(Point(0.0, 4.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
+recharge_position = Pose(Point(1.94, -3.99, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
+main_room_position = Pose(Point(0.0, 1.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
+corridor_position = Pose(Point(0.0, 2.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 3.14, axes='sxyz')))
+kitchen_position = Pose(Point(0.0, 3.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
+bed_room_position = Pose(Point(0.0, 4.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
 
 
 
@@ -123,6 +123,31 @@ class CheckDestination(State):
             return 'go_bed_room'
         return 'succeeded'
 
+class PauseNav(State):
+    def __init__(self):
+        State.__init__(self, outcomes=['succeeded','preempted'])
+
+        self.pause_pub = rospy.Publisher('/CARRY/pause_pathwrapper', Empty, queue_size=2)
+        pass
+
+    def execute(self, userdata):
+        self.pause_pub.publish(Empty())
+        rospy.loginfo("Pause navigation")
+        rospy.sleep(0.5)
+        return 'succeeded'
+
+class ResumeNav(State):
+    def __init__(self):
+        State.__init__(self, outcomes=['succeeded','preempted'])
+
+        self.resume_pub = rospy.Publisher('/CARRY/resume_pathwrapper', Empty, queue_size=2)
+        pass
+
+    def execute(self, userdata):
+        self.resume_pub.publish(Empty())
+        rospy.loginfo("Resume navigation")
+        rospy.sleep(0.5)
+        return 'succeeded'
 
 
 class MoveBack(State):
@@ -175,7 +200,7 @@ class Pause(State):
 
     def execute(self, userdata):
         rospy.loginfo("Thinking...")
-        rospy.sleep(2.0)   
+        rospy.sleep(5.0)   
         return 'succeeded'
 
 class Charging(State):
@@ -276,7 +301,7 @@ class SMACHAI():
             StateMachine.add('CHECK_DESTINATION', CheckDestination(),
                              transitions={'succeeded':'WAIT_INPUT',
                                           'aborted':'WAIT_INPUT',
-                                          'go_recharge':'GO_BACK',
+                                          'go_recharge':'STOP_NAV',
                                           'go_main_room':'WAIT_INPUT',
                                           'go_corridor':'WAIT_INPUT',
                                           'go_kitchen':'WAIT_INPUT',
@@ -285,7 +310,7 @@ class SMACHAI():
                                         'waypoint_out':'sm_output'})  
             StateMachine.add('WAIT_INPUT', self.sm_in_charge_room_wait_input, transitions={'succeeded':'succeeded',
                                                                                 'aborted':'succeeded',
-                                                                                'go_recharge':'GO_BACK',
+                                                                                'go_recharge':'STOP_NAV',
                                                                                 'go_main_room':'go_main_room'},
                                                                               remapping={'sm_output':'sm_output'})
             StateMachine.add('TEST', Pause2(),
@@ -294,6 +319,7 @@ class SMACHAI():
                              remapping={'waypoint_in':'sm_input',
                                         'waypoint_out':'sm_output'})
 
+            StateMachine.add('STOP_NAV', PauseNav(), transitions={'succeeded':'GO_BACK'})
             StateMachine.add('GO_BACK', MoveBack(), transitions={'succeeded':'PAUSE_BACK'})
             StateMachine.add('PAUSE_BACK', Pause(), transitions={'succeeded':'STOP_BACK'})
             StateMachine.add('STOP_BACK', Stop(), transitions={'succeeded':'PAUSE_STOP'})
@@ -301,7 +327,8 @@ class SMACHAI():
             StateMachine.add('CHARGING', Charging(), transitions={'succeeded':'GO_FRONT'})
             StateMachine.add('GO_FRONT', MoveFront(), transitions={'succeeded':'PAUSE_FRONT'})
             StateMachine.add('PAUSE_FRONT', Pause(), transitions={'succeeded':'STOP_FRONT'})
-            StateMachine.add('STOP_FRONT', Stop(), transitions={'succeeded':'WAIT_INPUT'})
+            StateMachine.add('STOP_FRONT', Stop(), transitions={'succeeded':'START_NAV'})
+            StateMachine.add('START_NAV', ResumeNav(), transitions={'succeeded':'WAIT_INPUT'})
 
 
 

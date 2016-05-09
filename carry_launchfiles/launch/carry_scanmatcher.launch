@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+
+  <include file="$(find carry_urdf_model)/launch/carry_model.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/sensors.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/communication.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/battery.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/scanmatcher.launch">
+  </include>
+
+  <include file="$(find carry_launchfiles)/launch/hector.launch">
+  </include>
+<!--
+  <include file="$(find carry_launchfiles)/launch/amcl.launch">
+  </include>
+-->
+
+
+</launch>
+
