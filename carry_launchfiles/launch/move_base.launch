@@ -9,7 +9,7 @@
     <param name="planner_name" type="str" value="CARRY_planner" />
     <param name="map_name" type="str" value="world" />
 
-    <rosparam file="$(find carry_navigation)/launch/nav_params.yaml" command="load" />
+    <rosparam file="$(find carry_launchfiles)/launch/nav_params.yaml" command="load" />
 
         <remap from="/ROBOT/goal" to="/CARRY/goal" />
         <remap from="/ROBOT/plan" to="/CARRY/plan" />

@@ -37,11 +37,12 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionFeedb
 
 
 
-recharge_position = Pose(Point(1.94, -3.99, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
-main_room_position = Pose(Point(0.0, 1.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
-corridor_position = Pose(Point(0.0, 2.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, 3.14, axes='sxyz')))
-kitchen_position = Pose(Point(0.0, 3.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
-bed_room_position = Pose(Point(0.0, 4.0, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
+recharge_position = Pose(Point(0.11, 0.02, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
+recharge_position2 = Pose(Point(1.37, 3.76, 0.0), Quaternion(*quaternion_from_euler(0, 0, 0.0, axes='sxyz')))
+main_room_position = Pose(Point(-0.23, 6.40, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
+corridor_position = Pose(Point(-3.40, 8.08, 0.0), Quaternion(*quaternion_from_euler(0, 0, 3.14, axes='sxyz')))
+kitchen_position = Pose(Point(-1.11, 8.69, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
+bed_room_position = Pose(Point(-2.70, 3.54, 0.0), Quaternion(*quaternion_from_euler(0, 0, -1.57, axes='sxyz')))
 
 
 

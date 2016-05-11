@@ -21,7 +21,7 @@
         <remap from="/map" to="/CARRY/map" />
   </node>
 -->
-  <node pkg="map_server" type="map_server" respawn="false" name="CARRY_HOME_map_node" output="screen" args="$(find home_urdf_model)/map/map.yaml">>
+  <node pkg="map_server" type="map_server" respawn="false" name="CARRY_HOME_map_node" output="screen" args="$(find home_urdf_model)/map/home_mix.yaml">>
         <param name="frame_id" type="str" value="world" />
         <remap from="/map" to="/CARRY/map" />
         <remap from="/map_metadata" to="/CARRY/map_metadata" />

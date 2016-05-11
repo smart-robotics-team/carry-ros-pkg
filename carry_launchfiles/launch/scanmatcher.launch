@@ -21,8 +21,8 @@
     <param name="use_alpha_beta" value="true"/>
     <param name="max_iterations" value="15"/>
     <param name="max_correspondence_dist" value="0.3"/>
-    <param name="max_angular_correction_deg" value="10"/>
-    <param name="max_linear_correction" value="0.10"/>
+    <param name="max_angular_correction_deg" value="20"/>
+    <param name="max_linear_correction" value="0.20"/>
 
   </node>
 <!--
